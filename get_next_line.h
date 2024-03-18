@@ -6,7 +6,7 @@
 /*   By: harandri <harandri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:35:16 by harandri          #+#    #+#             */
-/*   Updated: 2024/03/15 11:11:50 by harandri         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:20:53 by harandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 # endif
 char	*get_next_line(int fd);
-char	*ft_strchr(const char *s, int c);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+int	ft_strlen(char *str);
+int ft_strchr(char *str, char c);
+char *ft_strjoin(char *dst, char *buffer);
+char *copy_and_free(char *res, char *buffer);
+void	*ft_calloc(size_t nmemb, size_t size);
+
 #endif

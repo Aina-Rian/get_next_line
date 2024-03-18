@@ -6,95 +6,53 @@
 /*   By: harandri <harandri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:34:35 by harandri          #+#    #+#             */
-/*   Updated: 2024/03/15 17:04:21 by harandri         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:06:19 by harandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int handle_buff(char *dst, char *src)
+char *copy_and_free(char *res, char *buffer)
 {
-	int i;
+	char *result;
+
+	result = ft_strjoin(res, buffer);
+	free(res);
+	return (result);
+}
+
+char *get_all_buffer(int fd, char *res)
+{
+	size_t bytes;
+	char *buffer;
 	
-	i = 0;
-	while(*src)
+	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	// bytes = 1;
+	bytes = read(fd, buffer, BUFFER_SIZE);	
+	while (bytes > 0)
 	{
-		i++;
-		*dst = *src;
-		src++;
+		res = ft_strjoin(buffer, buffer);
+		if (ft_strchr(buffer, '\n') == 1)
+			break;
+		bytes = read(fd, buffer, BUFFER_SIZE);	
 	}
-	return (i);
+	return (res);
+	// res = ft_strjoin(res, buffer);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
-static void	*ft_strcpy(char *dst, const char *src, size_t size)
-{
-	while (size > 0)
-	{
-		*dst = *src;
-		dst++;
-		src++;
-		size--;
-	}
-	return (dst);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	s_size;
-
-	s_size = ft_strlen(src);
-	if (size > s_size + 1)
-	{
-		ft_strcpy(dst, src, s_size);
-		dst[s_size] = '\0';
-	}
-	else if (size != 0)
-	{
-		ft_strcpy(dst, src, size - 1);
-		dst[size - 1] = '\0';
-	}
-	return (s_size);
-}
-
-void hanldle_buffer(char *container, char *buffer)
-{
-	
-}
 
 char *get_next_line(int fd)
 {
+	static char *buffer;
 	char *result;
-	size_t bytes;
-	size_t i;
-	char buff[BUFFER_SIZE + 1];
 
-	i = 0;
-	result = (char *)malloc(10000000);
-	if(result == NULL)
-		return(NULL);
-	bytes = read(fd, &buff, BUFFER_SIZE);
-	while (bytes)
-	{
-		result[i] = buff;
-		i++;
-		if(buff == '\n' || buff == EOF)
-			break;
-		bytes = read(fd, &buff, BUFFER_SIZE);
-	}
-	if (i == 0 || bytes < 0)
-	{
-		free(result);
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	}
-	return(result);
+	buffer = get_all_buffer(fd, buffer);
+	if (!buffer)
+		return (NULL);
+	
+	return (buffer);
 }
