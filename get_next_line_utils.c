@@ -6,11 +6,20 @@
 /*   By: harandri <harandri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:35:11 by harandri          #+#    #+#             */
-/*   Updated: 2024/03/18 16:24:27 by harandri         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:57:01 by harandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char *copy_and_free(char *res, char *buffer)
+{
+	char *result;
+
+	result = ft_strjoin(res, buffer);
+	free(res);
+	return (result);
+}
 
 int	ft_strlen(char *str)
 {
@@ -33,46 +42,17 @@ int ft_strchr(char *str, char c)
 	return(0);
 }
 
-void	*ft_memset(void *s, int c, size_t n)
-{
-	unsigned char	*tptr;
-
-	tptr = s;
-	while (n > 0)
-	{
-		*tptr = c;
-		tptr++;
-		n--;
-	}
-	return (s);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	char	*cptr;
-
-	cptr = malloc(nmemb * size);
-	if (cptr == NULL)
-		return (0);
-	else
-		ft_bzero(cptr, nmemb * size);
-	return (cptr);
-}
-
-char *ft_strjoin(char *dst, char *buffer)
+char *ft_strjoin(char *dst, char *src)
 {
 	int t_size;
 	char *result;
 	int i;
 	int j;
 	
-	t_size = ft_strlen(dst) + ft_strlen(buffer);
+	t_size = ft_strlen(dst) + ft_strlen(src);
 	result = (char *)malloc(t_size + 1);
+	if (!result)
+		return (NULL);
 	i = 0;
 	while(dst[i] != '\0')
 	{
@@ -80,9 +60,9 @@ char *ft_strjoin(char *dst, char *buffer)
 		i++;
 	}
 	j = 0;
-	while(buffer[j] != '\0')
+	while(src[j] != '\0')
 	{
-		result[i] = buffer[j];
+		result[i] = src[j];
 		i++;
 		j++;
 	}
