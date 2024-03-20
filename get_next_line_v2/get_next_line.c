@@ -6,37 +6,27 @@
 /*   By: harandri <harandri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:19:11 by harandri          #+#    #+#             */
-/*   Updated: 2024/03/19 17:13:58 by harandri         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:32:33 by harandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+void get_buffer(int fd, t_list **buffer)
+{
+	
+}
+
 char	*get_next_line(int fd)
 {
-	static char *line;
-	char *buffer;
-	int bytes;
+	static t_list *buffer;
+	char *line;
 	
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	buffer = malloc(sizeof(char *) * BUFFER_SIZE + 1);
-	if (buffer)
-	{
-		while (1)
-		{
-			bytes = read(fd, buffer, BUFFER_SIZE);
-			if (bytes < 0)
-			{
-				free(buffer);
-				return (NULL);
-			}
-			
-			// ft_stsrchr
-			
-		}
-		return (line);
-	}
+	
+	
+
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: harandri <harandri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 13:35:11 by harandri          #+#    #+#             */
-/*   Updated: 2024/03/19 09:57:01 by harandri         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:06:25 by harandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ char *ft_strjoin(char *dst, char *src)
 	if (!result)
 		return (NULL);
 	i = 0;
-	while(dst[i] != '\0')
+	while(dst[i] != 0)
 	{
 		result[i] = dst[i];
 		i++;
 	}
 	j = 0;
-	while(src[j] != '\0')
+	while(src[j] != 0)
 	{
 		result[i] = src[j];
 		i++;
 		j++;
 	}
-	result[t_size] = '\0';
+	result[t_size] = 0;
 	return (result);
 }
 
