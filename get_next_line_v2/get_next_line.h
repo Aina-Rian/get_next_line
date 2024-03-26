@@ -6,7 +6,7 @@
 /*   By: harandri <harandri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 16:19:14 by harandri          #+#    #+#             */
-/*   Updated: 2024/03/20 09:28:56 by harandri         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:14:48 by harandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ typedef struct s_list
 
 
 char	*get_next_line(int fd);
+char	*ft_strdup(const char *s);
 
 #endif
